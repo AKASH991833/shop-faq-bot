@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shop FAQ Bot - free chatbot for your shop</title>
+<meta name="description" content="Add your shop's questions and answers. Get a chatbot link to share with customers on WhatsApp or Instagram. Free, no AI fees, works in your browser.">
+<meta name="theme-color" content="#7c3aed">
+<meta property="og:title" content="Shop FAQ Bot">
+<meta property="og:description" content="Free FAQ chatbot for any shop. Add your answers, share one link.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="bot.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><img src="icon.svg" alt="" width="34" height="34"><div><b id="brandName">FAQ Bot</b><span id="brandSub">for your shop</span></div></div>
+  <button id="themeBtn" class="icon-btn" type="button" aria-label="Switch dark or light mode" title="Dark / Light"><span aria-hidden="true">&#9680;</span></button>
+</header>
+<main class="wrap">
+  <nav class="tabs" id="tabs" role="tablist">
+    <button role="tab" id="tChat" aria-selected="true" type="button">Chat</button>
+    <button role="tab" id="tSetup" aria-selected="false" type="button">Setup (shop owner)</button>
+  </nav>
+
+  <section id="chatView" class="card chat">
+    <div id="log" class="log" role="log" aria-live="polite"></div>
+    <div id="chips" class="chips"></div>
+    <form id="send" class="send" autocomplete="off">
+      <input id="msg" type="text" maxlength="200" placeholder="Type your question..." aria-label="Type your question">
+      <button class="btn primary" type="submit">Send</button>
+    </form>
+  </section>
+
+  <section id="setupView" class="stack" hidden>
+    <div class="card">
+      <h2>1. Your shop</h2>
+      <label for="cName">Shop name</label><input id="cName" type="text" maxlength="60" placeholder="e.g. Sample General Store">
+      <div class="two">
+        <div><label for="cWa">WhatsApp number <small>(for questions the bot cannot answer)</small></label><input id="cWa" type="text" inputmode="tel" maxlength="16" placeholder="10-digit number"><div class="err" id="waErr"></div></div>
+        <div><label for="cGreet">Welcome message</label><input id="cGreet" type="text" maxlength="160" placeholder="Hi! Ask me anything about our shop."></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>2. Questions and answers</h2>
+      <p class="hint">Write each question the way a customer would ask it. Add keywords (comma separated) in English or Hinglish, like <i>timing, kab khulta, open</i>. More keywords = better matching.</p>
+      <div id="faqList" class="faqs"></div>
+      <div class="row"><button id="addFaq" class="btn" type="button">+ Add question</button><button id="tpl" class="btn" type="button">Load sample shop</button></div>
+      <div class="err" id="faqErr"></div>
+    </div>
+    <div class="card">
+      <h2>3. Share with customers</h2>
+      <p class="hint">This makes a link that opens only the chat with your answers inside. Send it on WhatsApp, put it in your Instagram bio, or print its QR. Customers cannot change anything.</p>
+      <div class="row"><button id="mkLink" class="btn primary" type="button">Create share link</button><button id="testBtn" class="btn" type="button">Test the bot</button></div>
+      <input id="linkOut" type="text" readonly aria-label="Share link" placeholder="Your link will show here" style="margin-top:10px">
+      <div class="row"><button id="copyLink" class="btn" type="button" disabled>Copy link</button><button id="waShare" class="btn" type="button" disabled>Share on WhatsApp</button></div>
+      <div id="toast" class="toast" role="status"></div>
+      <details class="how"><summary>Backup and unanswered questions</summary>
+        <div class="row"><button id="exp" class="btn" type="button">Download backup</button><button id="imp" class="btn" type="button">Restore backup</button><input id="impFile" type="file" accept="application/json,.json" hidden></div>
+        <h3 class="sm">Questions the bot could not answer <small>(asked on this device)</small></h3>
+        <ul id="unans" class="unans"></ul>
+        <button id="clrUnans" class="btn" type="button">Clear list</button>
+      </details>
+    </div>
+  </section>
+  <footer><p>Free. No sign-up. No AI service, no fees. Source on <a href="https://github.com/AKASH991833/shop-faq-bot" rel="noopener">GitHub</a>.</p></footer>
+</main>
+<script src="match.js"></script><script src="app.js"></script>
+</body>
+</html>
